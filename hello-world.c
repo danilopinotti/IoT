@@ -30,17 +30,19 @@ PROCESS_THREAD(hello_world_process, ev, data)
 
   while(1){
 
-   PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event && data == &button_sensor);
+   PROCESS_WAIT_EVENT();
+   if(ev == sensors_event && data == &button_sensor && !etimer_expired(&timer)){
      counter++;
      printf("Button press!");
      leds_toggle(LEDS_ALL);
      printf("Light: \%u\nCounter: \%u\n", light_sensor.value(0), counter);
+   }
 
-
-   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&timer));
+   if(etimer_expired(&timer)){
      leds_toggle(LEDS_ALL);
      etimer_reset(&timer);
      printf("Timer !\n");
+   }
 
   }
 
