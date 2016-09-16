@@ -24,7 +24,7 @@ PROCESS_THREAD(skel_process, ev, data)
   uip_ds6_addr_add(&ipaddr, 0, ADDR_MANUAL); 
 
   static uip_ipaddr_t remote_ipaddr;
-  uip_ip6addr(&remote_ipaddr, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3); 
+  uip_ip6addr(&remote_ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3); 
   static struct uip_udp_conn *client_udp;
   client_udp = udp_new(NULL,0,NULL);
   static char buf[30];
