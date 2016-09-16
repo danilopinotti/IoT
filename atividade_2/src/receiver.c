@@ -12,7 +12,7 @@ PROCESS_THREAD(skel_process, ev, data)
 
   PROCESS_BEGIN();
 
-  printf ("Esqueleto funcionando![barra-n]");
+  printf ("Receiver funcionando!\n");
 
   PROCESS_END();
 
