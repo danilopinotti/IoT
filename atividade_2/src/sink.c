@@ -1,3 +1,5 @@
+#include "net/rpl/rpl.h"
+
 #include "contiki.h"
 
 #include <stdio.h>
@@ -16,11 +18,13 @@ PROCESS_THREAD(skel_process, ev, data)
 
   PROCESS_BEGIN();
 
-   static uip_ipaddr_t ipaddr;
+  static uip_ipaddr_t ipaddr;
 
-   uip_ip6addr(&ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1);
+  uip_ip6addr(&ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1);
 
-   uip_ds6_addr_add(&ipaddr, 0, ADDR_MANUAL); 
+  uip_ds6_addr_add(&ipaddr, 0, ADDR_MANUAL); 
+
+  rpl_set_root(RPL_DEFAULT_INSTANCE,(uip_ip6addr_t *)&ipaddr);
 
   printf ("Sink funcionando!\n");
 
