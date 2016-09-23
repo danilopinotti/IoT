@@ -18,13 +18,8 @@ PROCESS_THREAD(skel_process, ev, data)
 
   PROCESS_BEGIN();
 
-  static uip_ipaddr_t ipaddr;
-
-  uip_ip6addr(&ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2);
-  uip_ds6_addr_add(&ipaddr, 0, ADDR_MANUAL); 
-
   static uip_ipaddr_t remote_ipaddr;
-  uip_ip6addr(&remote_ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3); 
+  uip_ip6addr(&remote_ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x212, 0x7403, 0x3, 0x303); 
   static struct uip_udp_conn *client_udp;
   client_udp = udp_new(NULL,0,NULL);
   static char buf[30];
@@ -34,7 +29,7 @@ PROCESS_THREAD(skel_process, ev, data)
   etimer_set(&et, 30 * CLOCK_SECOND);
   PROCESS_YIELD(); 
 
-  sprintf(buf, "TESTE");
+  sprintf(buf, "TESTE\n");
    
   uip_udp_packet_sendto(client_udp,buf,
 
