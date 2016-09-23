@@ -20,11 +20,13 @@ PROCESS_THREAD(skel_process, ev, data)
 
   static uip_ipaddr_t ipaddr;
 
-  uip_ip6addr(&ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1);
+  rpl_dag_t *dag; 
 
-  uip_ds6_addr_add(&ipaddr, 0, ADDR_MANUAL); 
+  uip_ip6addr(&ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0);
 
-  rpl_set_root(RPL_DEFAULT_INSTANCE,(uip_ip6addr_t *)&ipaddr);
+  dag = rpl_set_root(RPL_DEFAULT_INSTANCE, (uip_ip6addr_t *)&ipaddr);
+
+  rpl_set_prefix(dag, &ipaddr, 64);
 
   printf ("Sink funcionando!\n");
 
