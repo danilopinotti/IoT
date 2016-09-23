@@ -4,6 +4,10 @@
 
 #include <stdio.h>
 
+#include "dev/leds.h"
+#include "dev/light-sensor.h"
+#include "dev/button-sensor.h"
+
 #include "net/ip/uip.h"
 
 #include "net/ipv6/uip-ds6.h"
@@ -17,6 +21,8 @@ PROCESS_THREAD(skel_process, ev, data)
 {
 
   PROCESS_BEGIN();
+  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(light_sensor);
 
   static uip_ipaddr_t ipaddr;
   uip_ip6addr(&ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0);
@@ -27,14 +33,16 @@ PROCESS_THREAD(skel_process, ev, data)
 
   printf ("Receiver funcionando!\n");
 
+  while(1){
   PROCESS_WAIT_EVENT();
   if(ev == tcpip_event) {
      static char *appdata;
      appdata = (char *)uip_appdata;
      appdata[uip_datalen()] = 0;
-     printf("%s \n",appdata);
+     if(appdata == "t")
+       leds_toggle(LEDS_ALL);
     } 
-
+  }
 
   PROCESS_END();
 

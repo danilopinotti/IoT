@@ -1,5 +1,7 @@
 #include "net/ip/uip-udp-packet.h" 
 
+#include "dev/button-sensor.h"
+
 #include "contiki.h"
 
 #include <stdio.h>
@@ -22,24 +24,24 @@ PROCESS_THREAD(skel_process, ev, data)
   uip_ip6addr(&remote_ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x212, 0x7403, 0x3, 0x303); 
   static struct uip_udp_conn *client_udp;
   client_udp = udp_new(NULL,0,NULL);
-  static char buf[30];
+  static char command[30];
 
+  printf ("Sender funcionando!\n");
   //Time to wait RPL routes
-  static struct etimer et;
-  etimer_set(&et, 30 * CLOCK_SECOND);
   PROCESS_YIELD(); 
 
-  sprintf(buf, "TESTE\n");
-   
-  uip_udp_packet_sendto(client_udp,buf,
+  if(ev == sensors_event && data == &button_sensor){
 
-                         strlen(buf),
+  sprintf(command, "t");
+   
+  uip_udp_packet_sendto(client_udp,command,
+
+                         strlen(command),
 
                          &remote_ipaddr,
 
                          UIP_HTONS(5000));
-
-  printf ("Sender funcionando!\n");
+}
 
   PROCESS_END();
 
