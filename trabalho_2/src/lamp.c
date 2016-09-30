@@ -14,11 +14,7 @@ PROCESS_THREAD(skel_process, ev, data)
 {
 
   PROCESS_BEGIN();
-  SENSORS_ACTIVATE(button_sensor);
-  SENSORS_ACTIVATE(light_sensor);
-
-  NETSTACK_RDL.off(1);
-
+  NETSTACK_RDC.off(1);
   static uip_ipaddr_t ipaddr;
   uip_ip6addr(&ipaddr, 0xcafe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0);
 
@@ -34,8 +30,10 @@ PROCESS_THREAD(skel_process, ev, data)
      static char *appdata;
      appdata = (char *)uip_appdata;
      appdata[uip_datalen()] = 0;
-     if(appdata == "t")
-       leds_toggle(LEDS_ALL);
+     if(appdata == "n")
+       leds_on(LEDS_ALL);
+     else if (appdata == "f")
+       leds_off(LEDS_ALL);
     } 
   }
 

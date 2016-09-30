@@ -1,4 +1,4 @@
-CONTIKI_PROJECT = sink sender receiver
+CONTIKI_PROJECT = sink lamp interrupter
 
 all: $(CONTIKI_PROJECT)
 

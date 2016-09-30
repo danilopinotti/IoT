@@ -18,6 +18,8 @@ PROCESS_THREAD(skel_process, ev, data)
 
   PROCESS_BEGIN();
 
+  NETSTACK_RDC.off(1);
+
   static uip_ipaddr_t ipaddr;
 
   rpl_dag_t *dag; 

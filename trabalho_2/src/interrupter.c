@@ -27,10 +27,19 @@ PROCESS_THREAD(skel_process, ev, data)
   //Time to wait RPL routes
   PROCESS_YIELD(); 
 
+  int status = 0; 
+
   if(ev == sensors_event && data == &button_sensor){
 
-  sprintf(command, "t");
-   
+  if(status == 0){
+    sprintf(command, "n");
+    status = 1;
+  }
+  else if (status == 1){
+    sprintf(command, "f");
+    status = 0;
+  }
+
   uip_udp_packet_sendto(client_udp,command,
 
                          strlen(command),
