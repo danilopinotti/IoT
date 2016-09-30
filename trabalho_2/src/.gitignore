@@ -1,0 +1,8 @@
+*.a
+*.map
+*.sky
+obj_native/
+obj_sky/
+symbols.c
+symbols.h
+*.native
