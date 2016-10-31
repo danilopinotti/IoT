@@ -1,5 +1,6 @@
 import socket
 import sys
+import time
 
 def getStatus(s_id):
   s_id = str(s_id)
@@ -20,3 +21,16 @@ def toggle(s_id):
   message = str.encode('TOGGLE')
   sock = socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
   sock.sendto(message, (address, port))
+
+def turnOff(s_id):
+  time.sleep(0.1)
+  if getStatus(s_id) == "ON":
+    time.sleep(0.1)
+    toggle(s_id)
+
+def turnOn(s_id):
+  time.sleep(0.1)
+  if getStatus(s_id) == "OFF":
+    time.sleep(0.1)
+    toggle(s_id)
+  

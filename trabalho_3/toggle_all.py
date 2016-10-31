@@ -9,15 +9,11 @@ else:
 
 if action == "off":
   for i in range(2,8):
-    if mote.getStatus(i) == "ON":
-      mote.toggle(i)
-    time.sleep(0.1)
+    mote.turnOff(i)
 
 elif action == "on":
   for i in range(2,8):
-    if mote.getStatus(i) == "OFF":
-      mote.toggle(i)
-    time.sleep(0.1)
+    mote.turnOn(i)
 
 elif action == "toggle":
   for i in range(2,8):
