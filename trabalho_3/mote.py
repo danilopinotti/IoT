@@ -7,6 +7,7 @@ def getStatus(s_id):
   address = "cafe::212:740"+s_id+":"+s_id+":"+s_id+"0"+s_id 
   port = 5000
   message = str.encode('STATUS')
+  time.sleep(0.15)
   sock = socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
   sock2 = socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
   sock2.bind(("cafe::1", 5000))
@@ -19,18 +20,15 @@ def toggle(s_id):
   address = "cafe::212:740"+s_id+":"+s_id+":"+s_id+"0"+s_id
   port = 5000
   message = str.encode('TOGGLE')
+  time.sleep(0.15)
   sock = socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
   sock.sendto(message, (address, port))
 
 def turnOff(s_id):
-  time.sleep(0.1)
   if getStatus(s_id) == "ON":
-    time.sleep(0.1)
     toggle(s_id)
 
 def turnOn(s_id):
-  time.sleep(0.1)
   if getStatus(s_id) == "OFF":
-    time.sleep(0.1)
     toggle(s_id)
   
