@@ -1,6 +1,5 @@
 import sys
 import mote
-import time
 
 if len(sys.argv) > 1:
   action = sys.argv[1]
@@ -18,4 +17,3 @@ elif action == "on":
 elif action == "toggle":
   for i in range(2,8):
     mote.toggle(i)
-    time.sleep(0.1)
