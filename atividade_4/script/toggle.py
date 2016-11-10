@@ -12,9 +12,9 @@ def main():
 
     protocol = yield from Context.create_client_context()
 
-    request = Message(code=GET)
+    request = Message(code=POST)
 
-    request.set_request_uri('coap://[cafe::c30c:0:0:5]/test/hello')
+    request.set_request_uri('coap://[cafe::c30c:0:0:5]/actuators/toggle')
 
     try:
 
