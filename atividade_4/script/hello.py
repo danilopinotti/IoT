@@ -12,9 +12,9 @@ def main():
 
     protocol = yield from Context.create_client_context()
 
-    request = Message(code=GET)
+    request = Message(code=POST)
 
-    request.set_request_uri('coap://[cafe::2]/test/hello')
+    request.set_request_uri('coap://[cafe::c30c:0:0:5]/actuators/toggle')
 
     try:
 
@@ -28,7 +28,7 @@ def main():
 
     else:
 
-        print('Result: %s[barra-n]%r'%(response.code, response.payload))
+        print('Result: %s\n%r'%(response.code, response.payload))
 
 if __name__ == "__main__":
 
