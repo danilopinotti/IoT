@@ -6,13 +6,19 @@
 ?>
 
 <p>Lâmpadas</p>
-<form action="actions.php" method="GET" name="lamps">
+<form action="actions.php" method="POST">
 <?php for($i = 2; $i < 8; $i++): ?>
 
 	<div class="lamp-desc"> 
-		<button type="submit" name="lamp_toggle" value="<?= $i ?>" class="btn btn-default">Lâmpada <?= $i ?>	
+		<button type="submit" name="lamptoggle" value="<?= $i ?>" class="btn btn-default col-md-4">Lâmpada <?= $i ?>	
 			<span class="glyphicon glyphicon-lamp <?= ($lamp_state[$i]=="ON")?"warning-color":"" ?>"></span>
 		</button>
 	</div>
 <?php endfor; ?>
+</form>
+<form action="actions.php" method="POST">
+		<button type="submit" name="customaction" value="toggleall" class="btn btn-default">Alternar todas</button>
+		<button type="submit" name="customaction" value="turnonall" class="btn btn-default">Ligar todas</button><br>
+		<button type="submit" name="customaction" value="turnoffall" class="btn btn-default">Desligar todas</button>
+		<button type="submit" name="customaction" value="blink" class="btn btn-default">Todas piscarem</button>
 </form>
