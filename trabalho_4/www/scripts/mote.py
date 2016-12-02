@@ -1,13 +1,15 @@
 import time
 import logging
 import asyncio
+import re
 from aiocoap import *
 
 logging.basicConfig(level=logging.INFO)
 
 @asyncio.coroutine
 
-def getStatusExec(s_id, future):
+def getStatusExec(s_id):
+  global lamp_response
   s_id = str(s_id)
   protocol = yield from Context.create_client_context()
   request = Message(code=GET)
@@ -18,15 +20,11 @@ def getStatusExec(s_id, future):
     print('Failed to fetch resource:')
     print(e)
   else:
-    #print('Result: %s\n%r'%(response.code, response.payload))
-    future.set_result(response.payload)
+    lamp_response = re.search(b"(ON|OFF)", response.payload).group().decode("utf-8")
 
 def getStatus(s_id):
-  future = asyncio.Future()
-  asyncio.ensure_future(getStatusExec(s_id, future))
-  asyncio.get_event_loop().run_until_complete(future)
-  print("RESULTADO: "+future.result())
-  return future.result()
+  asyncio.get_event_loop().run_until_complete(getStatusExec(s_id))
+  return lamp_response
 
 def toggle(s_id):
   asyncio.get_event_loop().run_until_complete(toggleExec(s_id))
@@ -46,11 +44,9 @@ def toggleExec(s_id):
 
 def turnOff(s_id):
   if getStatus(s_id) == "ON":
-    time.sleep(0.1)
     toggle(s_id)
 
 def turnOn(s_id):
   if getStatus(s_id) == "OFF":
-    time.sleep(0.1)
     toggle(s_id)
   
