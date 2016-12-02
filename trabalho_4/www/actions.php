@@ -1,6 +1,6 @@
 <?php
+	print_r($_GET);
 
-	$output = shell_exec('ls -hal');
-	echo "<pre>".$output."</pre>";
+//	echo shell_exec("py scripts/toggle.py on 5");
 
 ?>
