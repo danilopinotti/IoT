@@ -3,7 +3,7 @@
 	if (isset($_POST['lamptoggle']))
 		shell_exec("py scripts/toggle.py toggle ".$_POST['lamptoggle']);
 
-	if (isset($_POST['customaction'])){
+	else if (isset($_POST['customaction'])){
 		if ($_POST['customaction'] == "toggleall")
 			shell_exec("py scripts/toggle.py");
 		elseif($_POST['customaction'] == "turnonall")

@@ -20,5 +20,5 @@
 		<button type="submit" name="customaction" value="toggleall" class="btn btn-default">Alternar todas</button>
 		<button type="submit" name="customaction" value="turnonall" class="btn btn-default">Ligar todas</button><br>
 		<button type="submit" name="customaction" value="turnoffall" class="btn btn-default">Desligar todas</button>
-		<button type="submit" name="customaction" value="blink" class="btn btn-default">Todas piscarem</button>
+		<button type="submit" name="customaction" value="blink" class="btn btn-default disabled" disabled>Todas piscarem</button>
 </form>
